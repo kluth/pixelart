@@ -13,36 +13,36 @@ const makeGrid = () => {
   height = document.getElementById('gridHeight').value
   width = document.getElementById('gridWidth').value
   makeRows(height)
-  makeCols(width)
+  //makeCols(width)
 }
 
 let button = document.getElementById('submit-btn')
 button.addEventListener('click', makeGrid)
 
-
+// Recursion through row creation
 const makeRows = (rows) => {
-  for(let r = 0; r < rows; r++) {
-    let row = document.createElement('div')
-    row.id = `row-${r}`
-    row.classList.add('row')
-    document.getElementById('grid').appendChild(row)
+  if(rows <= 0) {
+    return
   }
-}
+  let row = document.createElement('div')
+  row.id = `row-${rows}`
+  row.classList.add('row')
 
-const makeCols = (cols) => {
-  for(let r = 0; r < height; r++) {
-    for(let c = 0; c < width; c++) {
-      let col = document.createElement('div')
-      col.id = `col-${c}`
-      col.classList.add('col')
-      col.addEventListener('click', () => {
-        if(!col.hasAttribute('style')){
-          col.style.backgroundColor = document.getElementById('pixelColor').value
-        } else {
-          col.removeAttribute('style')
-        }
-      })
-      document.getElementById(`row-${r}`).appendChild(col)
-    }
+  // Populate rows with columns
+  for(let c = 0; c < width; c++) {
+    let col = document.createElement('div')
+    col.id = `col-${c}`
+    col.classList.add('col')
+    col.addEventListener('click', () => {
+      if(!col.hasAttribute('style')) {
+        col.style.backgroundColor = document.getElementById('pixelColor').value
+      } else {
+        col.removeAttribute('style')
+      }
+    })
+    row.appendChild(col)
   }
+
+  document.getElementById('grid').appendChild(row)
+  return makeRows(rows - 1)
 }
