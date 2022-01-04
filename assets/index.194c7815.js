@@ -12,8 +12,7 @@ const makeGrid = () => {
   document.getElementById('grid').innerHTML = ''
   height = document.getElementById('gridHeight').value
   width = document.getElementById('gridWidth').value
-  makeRows(height)
-  //makeCols(width)
+  makeRows(width)
 }
 
 let button = document.getElementById('submit-btn')
@@ -29,7 +28,7 @@ const makeRows = (rows) => {
   row.classList.add('row')
 
   // Populate rows with columns
-  for(let c = 0; c < width; c++) {
+  for(let c = 0; c < height; c++) {
     let col = document.createElement('div')
     col.id = `col-${c}`
     col.classList.add('col')
